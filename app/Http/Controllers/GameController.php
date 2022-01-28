@@ -16,70 +16,20 @@ class GameController extends Controller
     public function index()
     {
 
-        // $befor = Carbon::now()->subMonths(2)->timestamp;
-        // $after = Carbon::now()->addMonths(2)->timestamp;
-
-        $popularGames = Http::withHeaders([
-            'Client-ID' => 's6p5hps1ozlkh1ubf9150zlxzt56ed',
-            'Authorization' => 'Bearer 515b5f8btghk7u3q3bnmn98ffn45cr'
-        ])->withBody(
-            'fields *, cover.* , platforms.*;
-            where rating != null & platforms = {48,49,130,6}
-            ;
-            sort rating desc;
-            limit 12;'
-            ,'text/plain')
-            ->post('https://api.igdb.com/v4/games/')
-            ->json();
-
-            $recentliReviewed = Http::withHeaders([
-                'Client-ID' => 's6p5hps1ozlkh1ubf9150zlxzt56ed',
-                'Authorization' => 'Bearer 515b5f8btghk7u3q3bnmn98ffn45cr'
-            ])->withBody(
-                'fields *, cover.* , platforms.*;
-                where rating != null & platforms = {48,49,130,6} & rating_count > 5
-                ;
-                sort rating desc;
-                limit 3;'
-                ,'text/plain')
-                ->post('https://api.igdb.com/v4/games/')
-                ->json();
-
-            $mostanticipated = Http::withHeaders([
-                'Client-ID' => 's6p5hps1ozlkh1ubf9150zlxzt56ed',
-                'Authorization' => 'Bearer 515b5f8btghk7u3q3bnmn98ffn45cr'
-            ])->withBody(
-                'fields *, cover.* , platforms.*;
-                where rating != null & platforms = {48,49,130,6} & rating_count > 5
-                ;
-                sort rating desc;
-                limit 4;'
-                ,'text/plain')
-                ->post('https://api.igdb.com/v4/games/')
-                ->json();
-
-
-            $comingsoon = Http::withHeaders([
-                'Client-ID' => 's6p5hps1ozlkh1ubf9150zlxzt56ed',
-                'Authorization' => 'Bearer 515b5f8btghk7u3q3bnmn98ffn45cr'
-            ])->withBody(
-                'fields *, cover.* , platforms.*;
-                where rating != null & platforms = {48,49,130,6} & rating_count > 5
-                ;
-                sort rating desc;
-                limit 4;'
-                ,'text/plain')
-                ->post('https://api.igdb.com/v4/games/')
-                ->json();
+        $befor = Carbon::now()->subMonths(2)->timestamp;
+        $after = Carbon::now()->addMonths(2)->timestamp;
+        $current = Carbon::now()->timestamp;
 
 
 
 
-        return view('index' , [
-            'popularGames' => $popularGames,
-            'mostanticipated' => $mostanticipated,
-            'comingsoon' => $comingsoon,
-            'recentliReviewed' => $recentliReviewed, ]);
+
+
+
+
+
+
+        return view('index');
 
     }
 
